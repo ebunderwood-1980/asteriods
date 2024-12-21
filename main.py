@@ -15,6 +15,13 @@ def main():
     dt = 0
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
 
+    # Create Player and Enemy Groups
+    updatable = pygame.sprite.Group()
+    drawable = pygame.sprite.Group()
+    Player.containers = (updatable, drawable)
+    updatable.add(player)
+    drawable.add(player)
+
     # Game loop
     while True:
         for event in pygame.event.get():
@@ -22,9 +29,14 @@ def main():
                 return
 
         game_screen.fill("BLACK")
-        player.draw(game_screen)
         dt = game_clock.tick(60) / 1000
-        player.update(dt)
+
+        for thing in updatable:
+            thing.update(dt)
+
+        for thing in drawable:
+            thing.draw(game_screen)
+
         pygame.display.flip()
 
 
