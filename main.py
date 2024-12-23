@@ -3,6 +3,7 @@ from constants import *
 from player import Player
 from asteroid import Asteroid
 from asteroidfield import AsteroidField
+import sys
 
 
 def main():
@@ -42,6 +43,10 @@ def main():
 
         for thing in updatable:
             thing.update(dt)
+
+        for thing in asteroids:
+            if thing.collision_check(player):
+                sys.exit("Game Over")
 
         for thing in drawable:
             thing.draw(game_screen)
