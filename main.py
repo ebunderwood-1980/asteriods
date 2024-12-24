@@ -9,8 +9,6 @@ from shot import Shot
 
 def main():
     print("Starting asteroids!")
-    print(f"Screen width: {SCREEN_WIDTH}")
-    print(f"Screen height: {SCREEN_HEIGHT}")
 
     # Initiate pygame
     pygame.init()
@@ -28,7 +26,7 @@ def main():
     Player.containers = (updatable, drawable)
     Asteroid.containers = (asteroids, updatable, drawable)
     AsteroidField.containers = updatable
-    Shot.containers = (updatable, drawable)
+    Shot.containers = (shots, updatable, drawable)
 
     AsteroidField()
 
@@ -56,6 +54,11 @@ def main():
         for thing in asteroids:
             if thing.collision_check(player):
                 sys.exit("Game Over")
+
+            for shot in shots:
+                if thing.collision_check(shot):
+                    shot.kill()
+                    thing.kill()
 
         for thing in drawable:
             thing.draw(game_screen)
