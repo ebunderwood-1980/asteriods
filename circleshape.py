@@ -28,12 +28,3 @@ class CircleShape(pygame.sprite.Sprite):
             + (self.position.y - object.position.y) ** 2
         ) ** 0.5
         return distance < (self.radius + object.radius)
-
-
-#        distance_between = pygame.math.Vector2.distance_to(
-#            self.position, object.position
-#        )
-#        if distance_between <= self.radius:
-#            return True
-#        else:
-#            return False
